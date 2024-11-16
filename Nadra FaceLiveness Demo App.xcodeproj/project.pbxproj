@@ -11,6 +11,7 @@
 		5502B8C82CE901AF00643D78 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5502B8C72CE901AF00643D78 /* ContentView.swift */; };
 		5502B8CA2CE901B000643D78 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5502B8C92CE901B000643D78 /* Assets.xcassets */; };
 		5502B8CD2CE901B000643D78 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5502B8CC2CE901B000643D78 /* Preview Assets.xcassets */; };
+		5502B8D52CE901E700643D78 /* TruID in Frameworks */ = {isa = PBXBuildFile; productRef = 5502B8D42CE901E700643D78 /* TruID */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5502B8D52CE901E700643D78 /* TruID in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -83,6 +85,9 @@
 			dependencies = (
 			);
 			name = "Nadra FaceLiveness Demo App";
+			packageProductDependencies = (
+				5502B8D42CE901E700643D78 /* TruID */,
+			);
 			productName = "Nadra FaceLiveness Demo App";
 			productReference = 5502B8C22CE901AF00643D78 /* Nadra FaceLiveness Demo App.app */;
 			productType = "com.apple.product-type.application";
@@ -111,6 +116,9 @@
 				Base,
 			);
 			mainGroup = 5502B8B92CE901AF00643D78;
+			packageReferences = (
+				5502B8D32CE901E700643D78 /* XCRemoteSwiftPackageReference "TruIDPackage" */,
+			);
 			productRefGroup = 5502B8C32CE901AF00643D78 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -275,6 +283,7 @@
 				DEVELOPMENT_TEAM = WJAJA42L99;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSCameraUsageDescription = "We need your camera to verify face liveness";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -304,6 +313,7 @@
 				DEVELOPMENT_TEAM = WJAJA42L99;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSCameraUsageDescription = "We need your camera to verify face liveness";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -344,6 +354,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		5502B8D32CE901E700643D78 /* XCRemoteSwiftPackageReference "TruIDPackage" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/truid-ai/TruIDPackage.git";
+			requirement = {
+				branch = "nadra-face-liveness";
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		5502B8D42CE901E700643D78 /* TruID */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5502B8D32CE901E700643D78 /* XCRemoteSwiftPackageReference "TruIDPackage" */;
+			productName = TruID;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 5502B8BA2CE901AF00643D78 /* Project object */;
 }

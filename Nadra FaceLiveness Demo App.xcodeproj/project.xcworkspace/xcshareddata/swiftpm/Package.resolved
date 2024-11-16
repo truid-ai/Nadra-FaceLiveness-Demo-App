@@ -1,0 +1,15 @@
+{
+  "originHash" : "098b31d7c9c68de60a54a72cecb640800c05d1f5eee4870d3f2a060814f5b651",
+  "pins" : [
+    {
+      "identity" : "truidpackage",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/truid-ai/TruIDPackage.git",
+      "state" : {
+        "branch" : "nadra-face-liveness",
+        "revision" : "5c61fd20ca4827d5bbe2fabd9cedc4fa14bd50d6"
+      }
+    }
+  ],
+  "version" : 3
+}
