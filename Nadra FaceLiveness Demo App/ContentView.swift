@@ -17,7 +17,7 @@ struct ContentView: View {
     
     var body: some View {
         if isSDKRunning {
-            TruidMain(face_liveness: true, enableHelpScreens: isReportScreenEnabled, enableReportScreen: isHelpScreenEnabled, themeColor: Color.orange) { responseModel in
+            TruidMain(face_liveness: true, enableHelpScreens: isReportScreenEnabled, enableReportScreen: isHelpScreenEnabled, themeColor: Color.green) { responseModel in
                 response = responseModel
                 isSDKRunning = false
             } failure: { failure in
