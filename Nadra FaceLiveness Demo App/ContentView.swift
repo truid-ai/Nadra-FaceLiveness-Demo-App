@@ -17,7 +17,7 @@ struct ContentView: View {
     
     var body: some View {
         if isSDKRunning {
-            TruidMain(face_liveness: true, enableHelpScreens: isReportScreenEnabled, enableReportScreen: isHelpScreenEnabled, themeColor: Color.green) { responseModel in
+            TruidMain(face_liveness: true, enableHelpScreens: isReportScreenEnabled, enableReportScreen: isHelpScreenEnabled, themeColor: Color.blue) { responseModel in
                 response = responseModel
                 isSDKRunning = false
             } failure: { failure in
@@ -54,6 +54,9 @@ struct ContentView: View {
                 }
                 
                 Spacer()
+                
+                Toggle("Enable Help Screen", isOn: $isHelpScreenEnabled)
+                Toggle("Enable Report Screen", isOn: $isReportScreenEnabled)
                 
                 Button {
                     isSDKRunning = true
