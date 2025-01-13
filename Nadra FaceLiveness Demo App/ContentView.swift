@@ -10,19 +10,27 @@ import TruID
 
 struct ContentView: View {
     @State var isSDKRunning = false
-    @State var response: TruID.ResponseModel?
+    @State var response: TruID.TruIDResult?
+    @State var error: String? = nil
     
-    @State var isReportScreenEnabled = true
-    @State var isHelpScreenEnabled = true
+    @State private var isReportScreenEnabled = true
+    @State private var isHelpScreenEnabled = true
     
     var body: some View {
         if isSDKRunning {
-            TruidMain(face_liveness: true, enableHelpScreens: isReportScreenEnabled, enableReportScreen: isHelpScreenEnabled, themeColor: Color.blue) { responseModel in
-                response = responseModel
+            TruidMain(
+                face_liveness: true,
+                enableHelpScreens: isHelpScreenEnabled,
+                enableReportScreen: isReportScreenEnabled,
+                themeColor: Color.blue
+            ) { responseModel in
+                self.response = responseModel
                 isSDKRunning = false
+                self.error = nil
             } failure: { failure in
                 print(failure)
                 isSDKRunning = false
+                self.error = failure.message
             }
 
         } else {
@@ -30,33 +38,29 @@ struct ContentView: View {
                 Text("Face Liveness Demo App")
                     .font(.title)
                     .padding(.bottom, 16)
+                
+                Spacer()
 
                 if let response {
-                    if let result = response.result {
-                        HStack {
-                            Text("Liveness Passed:")
-                            Spacer()
-                            Image(systemName: result.status != "error" ? "checkmark.circle.fill" : "multiply.circle.fill")
+                    VStack {
+                        if let response = self.response {
+                            Image(uiImage: response.image)
+                                .resizable()
+                                .scaledToFit()
+                                .padding(4)
                         }
-                    }
-                    
-                    if let icao = response.icaoStatus {
-                        HStack {
-                            Text("ICAO Passed:")
-                            Spacer()
-                            Image(systemName: icao != "error" ? "checkmark.circle.fill" : "multiply.circle.fill")
+                        
+                        if let error {
+                            Text("Error Occurred:")
+                            Text(error)
                         }
-                    }
-                    
-                    if response.status != 200 {
-                        Text("Something is wrong at the server.")
                     }
                 }
                 
                 Spacer()
                 
-                Toggle("Enable Help Screen", isOn: $isHelpScreenEnabled)
-                Toggle("Enable Report Screen", isOn: $isReportScreenEnabled)
+                CustomToggle(text: "Enable Help Screen", isOn: $isHelpScreenEnabled)
+                CustomToggle(text: "Enable Report Screen", isOn: $isReportScreenEnabled)
                 
                 Button {
                     isSDKRunning = true
@@ -69,5 +73,31 @@ struct ContentView: View {
             }
             .padding()
         }
+    }
+}
+
+struct CustomToggle: View {
+    let text: String
+    @Binding var isOn: Bool
+    
+    var body: some View {
+        Button {
+            isOn.toggle()
+        } label: {
+            HStack {
+                Text(text)
+                    .font(.callout)
+            }
+            .frame(maxWidth: .infinity, alignment: .center)
+            .padding(.vertical, 8)
+            .background(isOn ? Color(UIColor.systemBlue) : Color(UIColor.systemBackground))
+            .background(in: RoundedRectangle(cornerRadius: 25))
+            .foregroundStyle(isOn ? .white : Color(UIColor.label))
+            .overlay(
+                RoundedRectangle(cornerRadius: 25)
+                    .stroke(.gray, lineWidth: isOn ? 0 : 1)
+            )
+        }
+        .buttonStyle(.plain)
     }
 }
